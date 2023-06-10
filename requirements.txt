@@ -1,0 +1,11 @@
+# Python=3.10.4
+Django>=4.2.1,<4.3
+djangorestframework>=3.14.0,<3.15
+psycopg2>=2.9.6,<2.10
+drf-spectacular>=0.26.2,<0.27
+drf-spectacular-sidecar>=2023.5.1,<2024.6
+djangorestframework-simplejwt>=5.2.2,<5.3
+django-cors-headers>=4.0.0,<4.1
+black>=23.3.0,<23.4 # black is a code formatter
+Pillow>=9.5.0,<9.6 # for image processing
+python-dotenv>=1.0.0 ,<1.1 # for environment variables

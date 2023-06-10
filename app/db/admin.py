@@ -6,7 +6,11 @@ from django.utils.translation import gettext_lazy as _
 from django.contrib.auth.forms import ReadOnlyPasswordHashField
 from django.core.exceptions import ValidationError
 
-from db.models import User
+from db.models import (
+    User,
+    Product,
+    Category,
+)
 
 
 class UserCreationForm(forms.ModelForm):
@@ -25,9 +29,8 @@ class UserCreationForm(forms.ModelForm):
             "password",
             "mobile",
             "is_active",
-            "is_delivery_partner",
             "is_employee",
-            "is_distributer",
+
             "is_admin",
             "is_superuser",
         ]
@@ -64,9 +67,8 @@ class UserChangeForm(forms.ModelForm):
             "password",
             "mobile",
             "is_active",
-            "is_delivery_partner",
             "is_employee",
-            "is_distributer",
+
             "is_admin",
             "is_superuser",
         ]
@@ -85,6 +87,7 @@ class UserAdmin(BaseUserAdmin):
         "name",
         "mobile",
         "is_active",
+        "is_employee",
         "is_admin",
     ]
     fieldsets = (
@@ -103,9 +106,7 @@ class UserAdmin(BaseUserAdmin):
             {
                 "fields": (
                     "is_active",
-                    "is_delivery_partner",
                     "is_employee",
-                    "is_distributer",
                     "is_admin",
                     "is_superuser",
                 ),
@@ -120,6 +121,7 @@ class UserAdmin(BaseUserAdmin):
         "name",
         "mobile",
         "is_active",
+        "is_employee",
         "is_admin",
     )
     search_fields = ("id", "email", "name", "mobile", "is_active", "is_admin")
@@ -135,9 +137,8 @@ class UserAdmin(BaseUserAdmin):
                     "name",
                     "mobile",
                     "is_active",
-                    "is_delivery_partner",
                     "is_employee",
-                    "is_distributer",
+
                     "is_admin",
                     "is_superuser",
                 ),
@@ -146,3 +147,5 @@ class UserAdmin(BaseUserAdmin):
     )
 
 admin.site.register(User, UserAdmin)
+admin.site.register(Product)
+admin.site.register(Category)

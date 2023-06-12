@@ -65,6 +65,7 @@ class User(AbstractBaseUser, PermissionsMixin):
         # Simplest possible answer: All admins are staff
         return self.is_admin
 
+
 class Category(models.Model):
     """Product Type in the system."""
 
@@ -74,18 +75,17 @@ class Category(models.Model):
     def __str__(self):
         return self.category
 
+
 def product_image_upload_path(instance, filename):
     """Return the path for the image."""
     ext = os.path.splitext(filename)[1]
     filename = f"{uuid.uuid4()}{ext}"
     return os.path.join("product", filename)
 
+
 class Product(models.Model):
     """Product in detail the system."""
 
-    user = models.ForeignKey(
-        User, on_delete=models.CASCADE, blank=False, null=False
-    )
     name = models.CharField(max_length=255)
     price = models.IntegerField(blank=False)
     discount_price = models.IntegerField(blank=False)
@@ -114,9 +114,8 @@ class Product(models.Model):
     )
     dicription = models.TextField(max_length=255, blank=False)
     is_available = models.BooleanField(default=True)
-    product_created = models.DateTimeField(auto_now_add=True)
-    product_updated = models.DateTimeField(auto_now=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
 
     def __str__(self):
         return self.name
-

@@ -289,3 +289,13 @@ dist
 .yarn/build-state.yml
 .yarn/install-state.gz
 .pnp.*
+
+
+# remove the static file upload folder
+static/
+
+# remove the media file upload folder
+media/
+
+# remove the database file
+db.sqlite3

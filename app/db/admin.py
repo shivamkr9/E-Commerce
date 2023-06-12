@@ -1,4 +1,3 @@
-
 from django import forms
 from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin as BaseUserAdmin
@@ -30,7 +29,6 @@ class UserCreationForm(forms.ModelForm):
             "mobile",
             "is_active",
             "is_employee",
-
             "is_admin",
             "is_superuser",
         ]
@@ -68,7 +66,6 @@ class UserChangeForm(forms.ModelForm):
             "mobile",
             "is_active",
             "is_employee",
-
             "is_admin",
             "is_superuser",
         ]
@@ -138,13 +135,13 @@ class UserAdmin(BaseUserAdmin):
                     "mobile",
                     "is_active",
                     "is_employee",
-
                     "is_admin",
                     "is_superuser",
                 ),
             },
         ),
     )
+
 
 admin.site.register(User, UserAdmin)
 admin.site.register(Product)

@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from db.models import Product, Category
+from db.models import Product, Category, Order
 
 
 class CategorySerializer(serializers.ModelSerializer):
@@ -56,3 +56,21 @@ class ProductImageSerializer(serializers.ModelSerializer):
             "product_image4": {"required": "True"},
             "product_image5": {"required": "True"},
         }
+
+
+class OrderCreateSerializer(serializers.ModelSerializer):
+    """Serializer for the user object."""
+
+    class Meta:
+        model = Order
+        exclude = ["created_at","user"]
+        read_only_fields = ["id"]
+
+    # def validate(self, attrs):
+    #     if attrs["quantity"] < 0 or attrs["quantity"] == 0:
+    #         raise serializers.ValidationError("Quantity must be greater than 0")
+    #     return super().validate(attrs)
+
+    def to_representation(self, instance):
+        self.fields["product"] = ProductSerializer(read_only=True)
+        return super(OrderCreateSerializer, self).to_representation(instance)

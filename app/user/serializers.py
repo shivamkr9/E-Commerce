@@ -44,3 +44,47 @@ class UserSerializer(serializers.ModelSerializer):
             user.save()
 
         return user
+
+
+class UserSerializerForUserOnly(serializers.ModelSerializer):
+    """Serializer for the user object."""
+
+    class Meta:
+        model = get_user_model()
+        fields = ["id", "email", "name", "mobile"]
+        read_only_fields = ["id"]
+
+    def validate(self, attrs):
+        mobile = attrs.get("mobile")
+        if not re.match(r"^[6-9]\d{9}$", str(mobile)):
+            raise serializers.ValidationError("Mobile number is not valid")
+        return
+
+
+
+class UserSerializerForAdmin(UserSerializerForUserOnly):
+    """Serializer for the user object."""
+
+    class Meta(UserSerializerForUserOnly.Meta):
+        fields = UserSerializerForUserOnly.Meta.fields + [
+            "is_active",
+            "is_employee",
+            "is_admin",
+        ]
+
+    def validate(self, attrs):
+        mobile = attrs.get("mobile")
+        if not re.match(r"^[6-9]\d{9}$", str(mobile)):
+            raise serializers.ValidationError("Mobile number is not valid")
+        return attrs
+
+    # def update(self, instance, validated_data):
+    #     """Update and return user."""
+    #     password = validated_data.pop('password', None)
+    #     user = super().update(instance, validated_data)
+
+    #     if password:
+    #         user.set_password(password)
+    #         user.save()
+
+    #     return user

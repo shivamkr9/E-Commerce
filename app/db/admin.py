@@ -9,6 +9,7 @@ from db.models import (
     User,
     Product,
     Category,
+    Order
 )
 
 
@@ -146,3 +147,4 @@ class UserAdmin(BaseUserAdmin):
 admin.site.register(User, UserAdmin)
 admin.site.register(Product)
 admin.site.register(Category)
+admin.site.register(Order)
